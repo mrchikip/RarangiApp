@@ -17,7 +17,7 @@ const App = () => {
           component={HomeScreen}
           options={{
             headerStyle: { backgroundColor: "#222F3E" },
-            headerTitleStyle: { color: "#FFFFFF" },
+            headerTitleStyle: { color: "#F7F7F7" },
             headerRight: () => (
               <TouchableOpacity onPress={() => console.log("Pressed")}>
                 <Text>New</Text>
