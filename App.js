@@ -15,17 +15,35 @@ const App = () => {
         <Stack.Screen
           name="HomeScreen"
           component={HomeScreen}
-          options={{
+          options={({ navigation }) => ({
+            title: "Rarangi App",
             headerStyle: { backgroundColor: "#222F3E" },
             headerTitleStyle: { color: "#F7F7F7" },
             headerRight: () => (
-              <TouchableOpacity onPress={() => console.log("Pressed")}>
-                <Text>New</Text>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("TaskFormScreen")}
+              >
+                <Text
+                  style={{ color: "#FFFFFF", marginRight: 20, fontSize: 15 }}
+                >
+                  New
+                </Text>
               </TouchableOpacity>
             ),
+          })}
+        />
+        <Stack.Screen
+          name="TaskFormScreen"
+          component={TaskFormScreen}
+          options={{
+            title: "Crear Tarea",
+            headerStyle: {
+              backgroundColor: "#222F3E",
+            },
+            headerTitleStyle: { color: "#FFFFFF" },
+            headerTintColor: "#FFFFFF",
           }}
         />
-        <Stack.Screen name="TaskFormScreen" component={TaskFormScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
