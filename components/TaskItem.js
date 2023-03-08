@@ -1,14 +1,24 @@
 // Importar los componentes necesarios de React Native
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
+// import { TouchableOpacity } from "react-native-web";
 
 // Definir el componente taskItem que recibe como argumento un objeto de tarea
 const taskItem = ({ task }) => {
   return (
     // Vista que contiene los elementos de texto para el título y descripción de la tarea
     <View style={styles.itemContainer}>
-      <Text style={styles.itemTitle}>{task.tittle}</Text>
-      <Text style={styles.itemTitle}>{task.description}</Text>
+      <TouchableOpacity>
+        <Text style={styles.itemTittle}>{task.tittle}</Text>
+        <Text style={styles.itemTittle}>{task.description}</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={{ backgroundColor: "#EE5253", padding: 7, borderRadius: 5 }}
+        onPress={() => console.log(task.id)}
+      >
+        <text style={{ color: "#FFFFFF" }}>Delete</text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -20,8 +30,10 @@ const styles = StyleSheet.create({
     padding: 20, // Espaciado interno de 20 puntos
     marginVertical: 8, // Espaciado vertical de 8 puntos
     borderRadius: 5, // Bordes redondeados con un radio de 5 puntos
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
-  itemTitle: {
+  itemTittle: {
     color: "#FFFFFF", // Color de texto blanco
   },
 });
