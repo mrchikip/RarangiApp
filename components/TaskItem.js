@@ -4,7 +4,7 @@ import React from "react";
 // import { TouchableOpacity } from "react-native-web";
 
 // Definir el componente taskItem que recibe como argumento un objeto de tarea
-const taskItem = ({ task }) => {
+const taskItem = ({ task, handleDelete }) => {
   return (
     // Vista que contiene los elementos de texto para el título y descripción de la tarea
     <View style={styles.itemContainer}>
@@ -15,7 +15,8 @@ const taskItem = ({ task }) => {
 
       <TouchableOpacity
         style={{ backgroundColor: "#EE5253", padding: 7, borderRadius: 5 }}
-        onPress={() => console.log(task.id)}
+        // onPress={() => console.log(task.id)}
+        onPress={() => handleDelete(task.id)}
       >
         <Text style={{ color: "#FFFFFF" }}>Delete</Text>
       </TouchableOpacity>

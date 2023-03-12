@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, RefreshControl } from "react-native";
 
 import TaskItem from "./TaskItem";
-import { getTasks, deleteTasks } from "../api";
+import { deleteTask, getTasks } from "../api";
 // import { RefreshControl } from "react-native-gesture-handler";
 
 const TaskList = () => {
@@ -18,8 +18,14 @@ const TaskList = () => {
     loadTasks();
   }, []);
 
+  const handleDelete = async (id) => {
+    // await console.log(id);
+    await deleteTask(id);
+    await loadTasks();
+  };
+
   const renderItem = ({ item }) => {
-    return <TaskItem task={item} />;
+    return <TaskItem task={item} handleDelete={handleDelete} />;
   };
 
   const onRefresh = React.useCallback(async () => {

@@ -15,7 +15,7 @@ export const saveTask = async (newTask) => {
 };
 
 export const deleteTask = async (id) => {
-  fetch("${API}/${id}", {
+  fetch(`${API}/${id}`, {
     method: "DELETE",
   });
 };

@@ -38,7 +38,7 @@ const TaskFormScreen = ({ navigation }) => {
       />
 
       <TouchableOpacity style={styles.buttonSave} onPress={handleSubmit}>
-        <text style={styles.buttonText}>Save Task</text>
+        <Text style={styles.buttonText}>Save Task</Text>
       </TouchableOpacity>
     </Layout>
   );
