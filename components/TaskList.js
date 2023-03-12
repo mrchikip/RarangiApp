@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, RefreshControl } from "react-native";
 
 import TaskItem from "./TaskItem";
-import { getTasks } from "../api";
-import { RefreshControl } from "react-native-gesture-handler";
+import { getTasks, deleteTasks } from "../api";
+// import { RefreshControl } from "react-native-gesture-handler";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);

@@ -13,3 +13,9 @@ export const saveTask = async (newTask) => {
   });
   return res.json();
 };
+
+export const deleteTask = async (id) => {
+  fetch("${API}/${id}", {
+    method: "DELETE",
+  });
+};
