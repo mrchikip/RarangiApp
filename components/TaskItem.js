@@ -17,7 +17,7 @@ const taskItem = ({ task }) => {
         style={{ backgroundColor: "#EE5253", padding: 7, borderRadius: 5 }}
         onPress={() => console.log(task.id)}
       >
-        <text style={{ color: "#FFFFFF" }}>Delete</text>
+        <Text style={{ color: "#FFFFFF" }}>Delete</Text>
       </TouchableOpacity>
     </View>
   );
