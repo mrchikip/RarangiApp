@@ -5,22 +5,44 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
-import { saveTask } from "../api";
+import { saveTask, getTask, updateTask } from "../api";
 
-const TaskFormScreen = ({ navigation }) => {
+const TaskFormScreen = ({ navigation, route }) => {
   const [task, setTask] = useState({
     tittle: "",
     description: "",
   });
 
+  const [editing, setEditing] = useState(false);
+
   const handleChange = (name, value) => setTask({ ...task, [name]: value });
 
-  const handleSubmit = () => {
-    saveTask(task);
-    navigation.navigate("HomeScreen");
+  const handleSubmit = async () => {
+    try {
+      if (!editing) {
+        await saveTask(task);
+      } else {
+        await updateTask(route.params.id, task);
+      }
+      navigation.navigate("HomeScreen");
+    } catch (error) {
+      console.error(error)
+    }
   };
+
+  useEffect(() => {
+    if (route.params && route.params.id) {
+      navigation.setOptions({ headerTitle: "Update Tasks" });
+      setEditing(true);
+
+      (async () => {
+        const task = await getTask(route.params.id);
+        setTask({ tittle: task.tittle, description: task.description });
+      })();
+    }
+  }, []);
 
   return (
     <Layout>
@@ -29,17 +51,25 @@ const TaskFormScreen = ({ navigation }) => {
         placeholder="Escribe un titulo"
         placeholderTextColor="#546574"
         onChangeText={(text) => handleChange("tittle", text)}
+        value={task.tittle}
       />
       <TextInput
         style={styles.input}
         placeholder="Escribe una descripcion"
         placeholderTextColor="#546574"
         onChangeText={(text) => handleChange("description", text)}
+        value={task.description}
       />
 
-      <TouchableOpacity style={styles.buttonSave} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Save Task</Text>
-      </TouchableOpacity>
+      {!editing ? (
+        <TouchableOpacity style={styles.buttonSave} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>Save Task</Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity style={styles.buttonUpdate} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>Update Task</Text>
+        </TouchableOpacity>
+      )}
     </Layout>
   );
 };
@@ -69,6 +99,15 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     textAlign: "center",
   },
+
+  buttonUpdate: {
+    padding: 10,
+    paddingBottom: 10,
+    borderRadius: 5,
+    marginBottom: 3,
+    backgroundColor: "#E58E26",
+    width: "90%",
+  }
 });
 
 export default TaskFormScreen;

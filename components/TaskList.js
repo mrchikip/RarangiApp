@@ -19,7 +19,6 @@ const TaskList = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    // await console.log(id);
     await deleteTask(id);
     await loadTasks();
   };
